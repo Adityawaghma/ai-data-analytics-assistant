@@ -1,4 +1,4 @@
-![CI](https://github.com/Adityawaghma/ai-data-analytics-assistant/actions/workflows/ci.yml/badge.sv) # AI Data Analytics Assistant
+![CI](https://github.com/Adityawaghma/ai-data-analytics-assistant/actions/workflows/ci.yml/badge.sv)
 
 An AI-powered desktop application for loading, cleaning, analyzing, and visualizing data, with a PyQt5 interface and SQL-backed storage.
 
