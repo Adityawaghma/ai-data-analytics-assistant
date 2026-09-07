@@ -1,0 +1,14 @@
+PyQt5==5.15.11
+PyQt5-Qt5==5.15.19
+PyQt5_sip==12.18.0
+PyQtWebEngine==5.15.7
+PyQtWebEngine-Qt5==5.15.19
+pandas==3.0.2
+numpy==2.4.4
+matplotlib==3.11.0
+plotly==6.8.0
+seaborn==0.13.2
+reportlab==5.0.0
+requests==2.34.2
+packaging==26.2
+APScheduler==3.10.4

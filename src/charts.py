@@ -72,7 +72,8 @@ class ChartCanvas(FigureCanvasQTAgg):
         plot_func(df) if the chart needs redrawing, then redraws canvas.
         """
         if df.empty:
-            raise ValueError(f"Cannot render {chart_type} chart: DataFrame is empty")
+            raise ValueError(
+                f"Cannot render {chart_type} chart: DataFrame is empty")
 
         key = get_cache_key(df, chart_type, key_x, key_y)
         if key == self._last_key:
@@ -101,7 +102,10 @@ class ChartCanvas(FigureCanvasQTAgg):
     def plot_histogram(self, df, col):
         """Render a histogram with KDE overlay for df[col]."""
         def _draw(d):
-            self._setup_axes(title=f"Distribution of {col}", xlabel=col, ylabel="Count")
+            self._setup_axes(
+                title=f"Distribution of {col}",
+                xlabel=col,
+                ylabel="Count")
             sns.histplot(d[col], ax=self.ax, kde=True)
 
         self._render_if_needed(df, "hist_canvas", col, "", _draw)
@@ -126,7 +130,8 @@ def _get_or_render_plotly(df, chart_type, fig_factory, **kwargs):
     builds the figure via fig_factory if needed, renders to HTML, and caches it.
     """
     if df.empty:
-        raise ValueError(f"Cannot generate {chart_type} chart: DataFrame is empty")
+        raise ValueError(
+            f"Cannot generate {chart_type} chart: DataFrame is empty")
 
     key = get_cache_key(df, chart_type, **kwargs)
     cached = get_cached_chart(key)
