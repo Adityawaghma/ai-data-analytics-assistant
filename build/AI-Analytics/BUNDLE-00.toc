@@ -1,3 +1,0 @@
-([('AI-Analytics',
-   '/Users/adityawaghmare/ai-data-analytics-assistant/dist/AI-Analytics',
-   'EXECUTABLE')],)

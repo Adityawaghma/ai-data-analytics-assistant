@@ -9,3 +9,7 @@ logs/
 *.db
 output/
 .DS_Store
+build/
+dist/
+*.egg-info/
+*.spec
