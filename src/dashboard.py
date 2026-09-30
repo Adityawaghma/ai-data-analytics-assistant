@@ -122,7 +122,7 @@ class DashboardWidget(QWidget):
             return
 
         try:
-            data = self.db.query()
+            data = self.db.query("SELECT * FROM dashboard_state")
         except Exception as exc:
             # Don't let a transient DB error kill the refresh loop.
             print(f"[DashboardWidget] refresh failed: {exc}")
