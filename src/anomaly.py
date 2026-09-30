@@ -11,7 +11,7 @@ from sklearn.ensemble import IsolationForest
 
 
 def detect_anomalies(df: pd.DataFrame, cols: list, contamination: float = 0.05,
-                      random_state: int = 42) -> pd.DataFrame:
+                     random_state: int = 42) -> pd.DataFrame:
     """
     Flag anomalous rows in df using Isolation Forest on the given columns.
 
@@ -34,7 +34,9 @@ def detect_anomalies(df: pd.DataFrame, cols: list, contamination: float = 0.05,
     if missing:
         raise KeyError(f"Column(s) not found in DataFrame: {missing}")
 
-    iso = IsolationForest(contamination=contamination, random_state=random_state)
+    iso = IsolationForest(
+        contamination=contamination,
+        random_state=random_state)
     scores = iso.fit_predict(df[cols])
 
     result = df.copy()
@@ -43,7 +45,8 @@ def detect_anomalies(df: pd.DataFrame, cols: list, contamination: float = 0.05,
     return result
 
 
-def store_anomalies(conn, df_with_flags: pd.DataFrame, table: str = "anomalies") -> int:
+def store_anomalies(conn, df_with_flags: pd.DataFrame,
+                    table: str = "anomalies") -> int:
     """
     Persist the flagged (is_anomaly == True) rows to a DB table (P2
     integration), so anomalous rows are queryable later.
@@ -85,7 +88,8 @@ if __name__ == "__main__":
     n_flagged = result["is_anomaly"].sum()
     expected = int(0.05 * len(df))
 
-    print(f"Rows flagged as anomalies: {n_flagged} (expected roughly {expected})")
+    print(
+        f"Rows flagged as anomalies: {n_flagged} (expected roughly {expected})")
     print(f"Injected outliers (first 5 rows) flagged: "
           f"{result['is_anomaly'].iloc[:5].sum()} / 5")
 

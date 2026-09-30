@@ -7,10 +7,11 @@ How to work:
     plot_elbow(ks, inertias, save_path="elbow.png")
 """
 
+import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 import matplotlib
-matplotlib.use("Agg")  # safe for headless/testing; embed via FigureCanvasQTAgg in PyQt5
-import matplotlib.pyplot as plt
+# safe for headless/testing; embed via FigureCanvasQTAgg in PyQt5
+matplotlib.use("Agg")
 
 
 def elbow_method(X, max_k: int = 10, random_state: int = 42):
@@ -32,7 +33,10 @@ def elbow_method(X, max_k: int = 10, random_state: int = 42):
 
     ks = list(range(2, max_k + 1))
     inertias = [
-        KMeans(n_clusters=k, n_init=10, random_state=random_state).fit(X).inertia_
+        KMeans(
+            n_clusters=k,
+            n_init=10,
+            random_state=random_state).fit(X).inertia_
         for k in ks
     ]
     return ks, inertias
@@ -73,7 +77,11 @@ def plot_elbow(ks, inertias, save_path: str = None, ax=None):
     ax.clear()
     ax.plot(ks, inertias, "bo-")
     best_k = find_elbow(ks, inertias)
-    ax.axvline(best_k, color="red", linestyle="--", label=f"Elbow at k={best_k}")
+    ax.axvline(
+        best_k,
+        color="red",
+        linestyle="--",
+        label=f"Elbow at k={best_k}")
     ax.set_xlabel("k (number of clusters)")
     ax.set_ylabel("Inertia")
     ax.set_title("Elbow Method")
@@ -134,7 +142,11 @@ if __name__ == "__main__":
     print(f"Chosen elbow k: {best_k}")
     # This synthetic data has 3 real clusters, so the elbow should land
     # near k=3 (not guaranteed exactly, since it's a noisy heuristic).
-    print(f"Elbow near true cluster count (3): {'yes' if abs(best_k - 3) <= 1 else 'no'}")
+    print(
+        f"Elbow near true cluster count (3): {
+            'yes' if abs(
+                best_k -
+                3) <= 1 else 'no'}")
 
     plot_elbow(ks, inertias, save_path="test_elbow.png")
     print("Saved test_elbow.png")

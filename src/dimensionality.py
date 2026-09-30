@@ -33,7 +33,8 @@ def apply_pca(df: pd.DataFrame, cols: list, n: int = 2):
         raise KeyError(f"Column(s) not found in DataFrame: {missing}")
     if n > len(cols):
         raise ValueError(
-            f"n_components ({n}) cannot exceed number of input columns ({len(cols)})"
+            f"n_components ({n}) cannot exceed number of input columns ({
+                len(cols)})"
         )
 
     pca = PCA(n_components=n)
@@ -51,12 +52,18 @@ def apply_pca(df: pd.DataFrame, cols: list, n: int = 2):
     return df_pca, pca.explained_variance_ratio_
 
 
-def store_pca_components(conn, df_pca: pd.DataFrame, table: str = "pca_components") -> None:
+def store_pca_components(conn, df_pca: pd.DataFrame,
+                         table: str = "pca_components") -> None:
     """
     Persist PCA components to a DB table (P2 integration), keeping the
     original DataFrame's index so rows can be joined back later.
     """
-    df_pca.to_sql(table, conn, if_exists="replace", index=True, index_label="row_id")
+    df_pca.to_sql(
+        table,
+        conn,
+        if_exists="replace",
+        index=True,
+        index_label="row_id")
 
 
 if __name__ == "__main__":
